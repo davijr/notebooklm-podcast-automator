@@ -1,0 +1,16 @@
+[project]
+name = "notebooklm_automator"
+version = "0.1.0"
+description = "Automates NotebookLM operations using Playwright and CDP connection."
+authors = [{ name = "upamune", email = "sneer-gender-evil@duck.com" }]
+requires-python = ">=3.9"
+dependencies = [
+    "playwright~=1.52.0",  # Version can be updated to the latest if appropriate
+    "streamlit~=1.45.0"    # Streamlit for web interface
+]
+
+[project.scripts]
+run-automator = "notebooklm_automator.main:run_automation"
+
+[tool.uv.sources]
+notebooklm_automator = { path = "src" }
