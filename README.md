@@ -59,20 +59,26 @@ This tool uses Playwright for browser automation and connects to an existing Chr
 
 **macOS**:
 ```bash
-/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir=./chrome-user-data --window-size=1280,800
 ```
 
 **Windows**:
 ```bash
-"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=./chrome-user-data --window-size=1280,800
 ```
 
 **Linux**:
 ```bash
-google-chrome --remote-debugging-port=9222
+google-chrome --remote-debugging-port=9222 --user-data-dir=./chrome-user-data --window-size=1280,800
 ```
 
 The default port is `9222`, but you can use a different port and specify it with the `-p` flag when running the automator.
+
+The `--user-data-dir=./chrome-user-data` parameter creates a separate Chrome profile for this automation, which helps avoid conflicts with your regular browsing sessions and ensures a clean environment for the automation to run.
+
+**Note about Google login**: When you first launch Chrome with this parameter, you'll need to log in to your Google account to access NotebookLM. However, for subsequent launches with the same `--user-data-dir` path, your login session will be preserved, and you won't need to log in again. This makes the automation process much smoother after the initial setup.
+
+**Important**: Make sure your Chrome window is at least 1261 pixels wide. NotebookLM requires sufficient width to display its 3-column layout correctly. The automation tool will attempt to set the viewport size automatically, but having a properly sized browser window helps ensure the UI elements are in their expected positions.
 
 ## Execution Instructions
 

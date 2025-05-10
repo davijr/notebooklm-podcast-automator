@@ -68,6 +68,9 @@ class NotebookLMAutomator:
             context = self.browser.contexts[0]
             self.page = context.new_page()
 
+            # Set viewport size to ensure proper layout (minimum width 1261px for 3-column layout)
+            self.page.set_viewport_size({"width": 1280, "height": 800})
+
             # Navigate to NotebookLM
             self.page.goto("https://notebooklm.google.com/", timeout=60000)
 
