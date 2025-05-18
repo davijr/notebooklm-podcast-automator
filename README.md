@@ -11,8 +11,21 @@ NotebookLM Automator is designed to automate the following operations in Google 
 - Creating new notebooks
 - Adding website and YouTube URLs as sources to notebooks
 - Starting Audio Overview (podcast) generation
+- Uploading generated podcasts to Spotify
 
-This tool uses Playwright for browser automation and connects to an existing Chrome browser via Chrome DevTools Protocol (CDP). It is based on [DataNath/notebooklm_source_automation](https://github.com/DataNath/notebooklm_source_automation) with enhancements including improved authentication method, Audio Overview generation capability, and modernized project structure.
+This tool uses Playwright for browser automation and connects to an existing Chrome browser via Chrome DevTools Protocol (CDP). It is based on [DataNath/notebooklm_source_automation](https://github.com/DataNath/notebooklm_source_automation) with enhancements including improved authentication method, Audio Overview generation capability, Spotify integration, and modernized project structure.
+
+## Spotify Uploader Features
+
+The Spotify Uploader feature allows you to automatically upload your generated podcasts to Spotify. Key features include:
+
+- Automatic Spotify login using existing credentials
+- Podcast metadata management (title, description, etc.)
+- Cover art upload support
+- Episode publishing with proper categorization
+- Progress tracking and error handling
+
+To use the Spotify Uploader, you'll need a Spotify for Podcasters account and the necessary permissions to publish podcasts.
 
 ## Setup Instructions
 
