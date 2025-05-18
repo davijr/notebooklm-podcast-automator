@@ -40,6 +40,14 @@ def main():
             help="Port for Chrome DevTools Protocol connection. Only change if you started Chrome with a different remote debugging port."
         )
 
+        # Jina Reader option
+        use_jina_reader = st.checkbox(
+            "Use Jina Reader API",
+            value=False,
+            help="If checked, prepends 'https://r.jina.ai/' to URLs to use Jina Reader API for better content extraction.",
+            key="use_jina_reader"
+        )
+
         # Chrome launch instructions
         st.markdown("### How to Launch Chrome with Remote Debugging")
         st.code(f"/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port={port} --user-data-dir=./chrome-user-data --window-size=1280,800", language="bash")
@@ -85,19 +93,26 @@ def main():
         urls_list = []
 
         try:
+            # Get Jina Reader option from sidebar
+            use_jina_reader = st.session_state.get('use_jina_reader', False)
+
             if tab1._active and urls_text.strip():
                 # Process URLs from text area
-                urls_list = [url.strip() for url in urls_text.split('\n') if url.strip()]
-                if not urls_list:
+                raw_urls = [url.strip() for url in urls_text.split('\n') if url.strip()]
+                if not raw_urls:
                     st.error("No valid URLs provided in the text area.")
                     return
+                # Apply Jina Reader if enabled
+                urls_list = get_urls(url_flag=",".join(raw_urls), use_jina_reader=use_jina_reader)
             elif tab2._active and uploaded_file is not None:
                 # Process URLs from uploaded file
                 stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-                urls_list = [url.strip() for url in stringio.readlines() if url.strip()]
-                if not urls_list:
+                raw_urls = [url.strip() for url in stringio.readlines() if url.strip()]
+                if not raw_urls:
                     st.error("No valid URLs found in the uploaded file.")
                     return
+                # Apply Jina Reader if enabled
+                urls_list = get_urls(url_flag=",".join(raw_urls), use_jina_reader=use_jina_reader)
             else:
                 st.error("Please provide URLs either by entering them or uploading a file.")
                 return

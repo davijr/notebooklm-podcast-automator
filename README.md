@@ -96,6 +96,7 @@ This will launch a web interface at http://localhost:8501 where you can:
 - Enter URLs directly in a text area
 - Upload a file containing URLs
 - Configure the CDP port
+- Enable Jina Reader API for better content extraction
 - Monitor the automation progress with a visual interface and real-time logs
 - See clear success/error messages with troubleshooting guidance
 
@@ -148,8 +149,22 @@ run-automator -p 9223 urls.txt
 - `file`: Optional file containing URLs (one per line).
 - `-u, --urls URLS`: Comma-separated list of website or YouTube URLs.
 - `-p, --port PORT`: CDP port for Chrome connection (default: 9222). Only change this if you started Chrome with a different remote debugging port.
+- `-j, --jina-reader`: Use Jina Reader API by prepending "https://r.jina.ai/" to URLs. This can improve content extraction for some websites.
 
 If no file or URLs are provided, the script will read from standard input (either from a pipe or interactively).
+
+#### Using Jina Reader API
+
+```bash
+# With URL flag
+run-automator -j -u "https://example.com"
+
+# With file
+run-automator -j urls.txt
+
+# With stdin
+cat urls.txt | run-automator -j
+```
 
 ## Notes and Caveats
 

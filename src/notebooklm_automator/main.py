@@ -38,6 +38,11 @@ def run_automation():
         default=9222,
         help="Port for Chrome DevTools Protocol (CDP) connection (default: 9222)."
     )
+    parser.add_argument(
+        "-j", "--jina-reader",
+        action="store_true",
+        help="Use Jina Reader API by prepending 'https://r.jina.ai/' to URLs."
+    )
     args = parser.parse_args()
 
     # Get URLs from command-line, file, or stdin
@@ -53,7 +58,7 @@ def run_automation():
             print("You can provide URLs by typing or pasting them below.")
 
         # Get URLs from the appropriate source
-        urls_list = get_urls(args.urls, args.file)
+        urls_list = get_urls(args.urls, args.file, args.jina_reader)
         print(f"Processing {len(urls_list)} URLs from {input_source}")
 
     except ValueError as e:

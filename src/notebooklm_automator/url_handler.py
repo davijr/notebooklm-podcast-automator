@@ -1,16 +1,18 @@
 import sys
 import os
 
-def get_urls(url_flag: str = None, file_path: str = None) -> list:
+def get_urls(url_flag: str = None, file_path: str = None, use_jina_reader: bool = False) -> list:
     """
     Get a list of URLs from a comma-separated string, a file, or standard input.
+    Optionally prepends Jina Reader API prefix to URLs.
 
     Args:
         url_flag: Optional comma-separated string of URLs.
         file_path: Optional path to a file containing URLs (one per line).
+        use_jina_reader: If True, prepends "https://r.jina.ai/" to each URL.
 
     Returns:
-        A list of URLs.
+        A list of URLs, potentially with Jina Reader API prefix.
 
     Raises:
         ValueError: If no valid URLs are provided.
@@ -65,5 +67,11 @@ def get_urls(url_flag: str = None, file_path: str = None) -> list:
     # Raise error if no valid URLs are provided
     if not urls:
         raise ValueError("No URLs provided. Please provide at least one valid URL.")
+
+    # Apply Jina Reader API prefix if enabled
+    if use_jina_reader:
+        jina_prefix = "https://r.jina.ai/"
+        urls = [f"{jina_prefix}{url}" if not url.startswith(jina_prefix) else url for url in urls]
+        print("Using Jina Reader API for URLs")
 
     return urls
