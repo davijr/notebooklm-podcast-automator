@@ -1,0 +1,94 @@
+{
+  "checksums": [
+    {
+      "id": "github_release/github.com/astral-sh/ruff/0.11.10/ruff-aarch64-apple-darwin.tar.gz",
+      "checksum": "1C4187C5ECD76535B76E991AF1114D9C9947FE69E6D1A69C9ED6723D6777A53E",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/astral-sh/ruff/0.11.10/ruff-aarch64-pc-windows-msvc.zip",
+      "checksum": "765234E319C8FCE0B0216F570F4480B7A7B77D019347FA301536B808C245375B",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/astral-sh/ruff/0.11.10/ruff-aarch64-unknown-linux-musl.tar.gz",
+      "checksum": "ACDDBF808BA83C9DDA01391DDD1C7F0C23D36F1F2CBBEE6290D98363F3E4CAFC",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/astral-sh/ruff/0.11.10/ruff-x86_64-apple-darwin.tar.gz",
+      "checksum": "25F0A8B819EA5C9377BE02FD98C363FFB5659C35358881A1CE909F30B362CB39",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/astral-sh/ruff/0.11.10/ruff-x86_64-pc-windows-msvc.zip",
+      "checksum": "D77BC4ECDB0F50F5A70422DB90EC735CAF71C3EA3E201E6E84A78FED695A4950",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/astral-sh/ruff/0.11.10/ruff-x86_64-unknown-linux-musl.tar.gz",
+      "checksum": "8765D2F71C422F60A1456A2B2D9B2EE2AB286CB4859A774B5EFB0A837A07F6DD",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/astral-sh/uv/0.7.5/uv-aarch64-apple-darwin.tar.gz",
+      "checksum": "8D82C7F6FCFD79B142C8845F694C8225DD5B401CD720E8E1E2A35A1C4150F516",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/astral-sh/uv/0.7.5/uv-aarch64-unknown-linux-musl.tar.gz",
+      "checksum": "CE23F5E1D22F1CDFC0DB4358D3B2642C115AD99D404AEF15030AF31E39EF3484",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/astral-sh/uv/0.7.5/uv-x86_64-apple-darwin.tar.gz",
+      "checksum": "751AE339C91A6B8EDDB868A64222C2533C722042476E4F28466683DDF96FA488",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/astral-sh/uv/0.7.5/uv-x86_64-pc-windows-msvc.zip",
+      "checksum": "E95CB3789B2F80052C80048FF2865E06EAE7512D06D304127898C70C4FD3564F",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/astral-sh/uv/0.7.5/uv-x86_64-unknown-linux-musl.tar.gz",
+      "checksum": "BE058167AE65F7A2B56F607B070BD4E93DACD09BE52511CCB8EBB10FA132709F",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/cli/cli/v2.72.0/gh_2.72.0_linux_amd64.tar.gz",
+      "checksum": "FFD3A9791075CF6119531302B06554E658F38ED12675A7FBFBF4D6B114C77F38",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/cli/cli/v2.72.0/gh_2.72.0_linux_arm64.tar.gz",
+      "checksum": "30D3B41200B7A195C340D0F121BD214450A10770E4E5164FBF76540A8A68E384",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/cli/cli/v2.72.0/gh_2.72.0_macOS_amd64.zip",
+      "checksum": "46A85DB5AD8141DADE7476C0D44ED0B1C7AC86EFB5F9FE8A7AD2002A03A2853F",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/cli/cli/v2.72.0/gh_2.72.0_macOS_arm64.zip",
+      "checksum": "ADF08DC15504EF74FBD37BC1A9ABF2EF2B19D5E0DB332A39877532B350B1F1D7",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/cli/cli/v2.72.0/gh_2.72.0_windows_amd64.zip",
+      "checksum": "A6CB46FAF1AF42130AA36D7210043D9AE0A7F3CA66C3CF4D0A1D656275CEDAA9",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/cli/cli/v2.72.0/gh_2.72.0_windows_arm64.zip",
+      "checksum": "7CD64B908486492F17107382AF32726B8AD8401D8BEBCC7378EEEF3093BAC24A",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "registries/github_content/github.com/aquaproj/aqua-registry/v4.368.0/registry.yaml",
+      "checksum": "2734E65A5B18CF175970AE4873E920CFEE55EBBAD20C387AB20C20A42D8B4DDD0A576FC04F2FFF4F8DDB14B2F57EBF44618A8258ED45ACE104BA0F099341D04C",
+      "algorithm": "sha512"
+    }
+  ]
+}
