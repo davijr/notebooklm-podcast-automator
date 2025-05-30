@@ -6,7 +6,9 @@ authors = [{ name = "upamune", email = "sneer-gender-evil@duck.com" }]
 requires-python = ">=3.9"
 dependencies = [
     "playwright~=1.52.0",  # Version can be updated to the latest if appropriate
-    "streamlit~=1.45.0"    # Streamlit for web interface
+    "streamlit~=1.45.0",   # Streamlit for web interface
+    "ulid-py~=1.1.0",      # ULID generation for unique file names
+    "requests~=2.31.0"     # HTTP requests for audio download
 ]
 
 [project.scripts]

@@ -1,0 +1,53 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  VENV_PATH: .venv
+  PYTHON: "{{.VENV_PATH}}/bin/python"
+  STREAMLIT: "{{.VENV_PATH}}/bin/streamlit"
+
+tasks:
+  setup:
+    desc: Setup development environment
+    cmds:
+      - uv venv
+      - uv pip install -e .
+    status:
+      - test -d {{.VENV_PATH}}
+
+  chrome:
+    desc: Launch Chrome with remote debugging enabled
+    cmd: /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir=./chrome-user-data --window-size=1280,800
+    platforms: [darwin]
+
+  chrome:windows:
+    desc: Launch Chrome with remote debugging enabled (Windows)
+    cmd: '"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=./chrome-user-data --window-size=1280,800'
+    platforms: [windows]
+
+  chrome:linux:
+    desc: Launch Chrome with remote debugging enabled (Linux)
+    cmd: google-chrome --remote-debugging-port=9222 --user-data-dir=./chrome-user-data --window-size=1280,800
+    platforms: [linux]
+
+  app:
+    desc: Start unified Streamlit app (NotebookLM + Spotify tabs)
+    deps: [setup]
+    cmd: "{{.STREAMLIT}} run src/notebooklm_automator/streamlit_app.py"
+
+  notebooklm:
+    desc: Start NotebookLM Streamlit app
+    deps: [setup]
+    cmd: "{{.STREAMLIT}} run src/notebooklm_automator/notebooklm_streamlit_app.py"
+
+  spotify:
+    desc: Start Spotify upload Streamlit app
+    deps: [setup]
+    cmd: "{{.STREAMLIT}} run src/notebooklm_automator/spotify_streamlit_app.py"
+
+  cli:
+    desc: Run CLI version with URLs from file or stdin
+    deps: [setup]
+    cmd: "{{.VENV_PATH}}/bin/run-automator {{.CLI_ARGS}}"
+

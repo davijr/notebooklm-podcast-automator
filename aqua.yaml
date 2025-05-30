@@ -12,3 +12,4 @@ packages:
 - name: cli/cli@v2.72.0
 - name: astral-sh/uv@0.7.5
 - name: astral-sh/ruff@0.11.10
+- name: go-task/task@v3.43.3

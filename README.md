@@ -101,15 +101,29 @@ Ensure your virtual environment is activated and Chrome is running with remote d
 
 **The Streamlit interface is the recommended way to use this tool** as it provides a user-friendly experience with visual feedback on the automation progress.
 
+#### Unified Interface (Both NotebookLM and Spotify in Tabs)
 ```bash
 streamlit run src/notebooklm_automator/streamlit_app.py
 ```
 
-This will launch a web interface at http://localhost:8501 where you can:
+#### Separate Applications
+You can also run the NotebookLM and Spotify functionalities as separate applications:
+
+**For NotebookLM podcast creation only:**
+```bash
+streamlit run src/notebooklm_automator/notebooklm_streamlit_app.py
+```
+
+**For Spotify upload only:**
+```bash
+streamlit run src/notebooklm_automator/spotify_streamlit_app.py
+```
+
+These will launch web interfaces at http://localhost:8501 where you can:
 - Enter URLs directly in a text area
 - Upload a file containing URLs
 - Configure the CDP port
-- Enable Jina Reader API for better content extraction
+- Enable Jina Reader API for better content extraction (NotebookLM app only)
 - Monitor the automation progress with a visual interface and real-time logs
 - See clear success/error messages with troubleshooting guidance
 

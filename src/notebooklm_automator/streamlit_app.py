@@ -124,7 +124,7 @@ def main():
         # Jina Reader option
         use_jina_reader = st.checkbox(
             "Use Jina Reader API",
-            value=False,
+            value=True,
             help="If checked, prepends 'https://r.jina.ai/' to URLs to use Jina Reader API for better content extraction.",
             key="use_jina_reader"
         )
@@ -200,7 +200,6 @@ def process_notebooklm_urls(urls_text: str, port: int, use_jina_reader: bool) ->
         with NotebookLMAutomator(port) as automator:
             try:
                 # Connect to Chrome and navigate to NotebookLM
-                automator.connect()
                 print("Successfully connected to Chrome and navigated to NotebookLM.")
                 status_text.write("Successfully connected to NotebookLM...")
                 log_output.text(log_capture.getvalue())

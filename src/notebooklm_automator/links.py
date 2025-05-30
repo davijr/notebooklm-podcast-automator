@@ -147,8 +147,22 @@ def generate_audio_overview(page: Page) -> None:
 
         # Find and click the Generate button within the Audio Overview section
         generate_button = page.get_by_role("button", name=generate_text)
-        expect(generate_button).to_be_enabled()
-        generate_button.click()
+        
+        # Wait longer for the generate button to be enabled after sources are added
+        print("Waiting for Audio Overview generation button to be enabled...")
+        try:
+            expect(generate_button).to_be_enabled(timeout=30000)  # Wait up to 30 seconds
+            generate_button.click()
+        except Exception as e:
+            print(f"Generate button not enabled after 30 seconds: {str(e)}")
+            # Try to wait a bit more and check again
+            time.sleep(10)
+            try:
+                expect(generate_button).to_be_enabled(timeout=10000)  # Additional 10 seconds
+                generate_button.click()
+            except Exception as e2:
+                print(f"Generate button still not enabled: {str(e2)}")
+                raise e2
 
         # Optional: Confirm UI changes indicating generation has started
         # For example, button might be disabled after clicking

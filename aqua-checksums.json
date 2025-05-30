@@ -86,6 +86,36 @@
       "algorithm": "sha256"
     },
     {
+      "id": "github_release/github.com/go-task/task/v3.43.3/task_darwin_amd64.tar.gz",
+      "checksum": "4AAB49EF373CA1B61B4CFB8011A73C1200F790CC7E783E36EF33052B90D47316",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/go-task/task/v3.43.3/task_darwin_arm64.tar.gz",
+      "checksum": "39F692B91A95220ABA5E9B7C8546475AC9DD133E92CEFE97B741F917606DEDA0",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/go-task/task/v3.43.3/task_linux_amd64.tar.gz",
+      "checksum": "9F93A694464ADDAF5205661FC43FC9B9FA2B31596731E91510B41811DA79FE21",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/go-task/task/v3.43.3/task_linux_arm64.tar.gz",
+      "checksum": "B52835656FEBFCBAAA4513B8AA7B7FF3B57361DE482D6CEC8C895710D8648625",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/go-task/task/v3.43.3/task_windows_amd64.zip",
+      "checksum": "08B7D03B2DDE0A4B3F53CD8C6DCA544087C7B388CD6E5405C284CCC70563936C",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/go-task/task/v3.43.3/task_windows_arm64.zip",
+      "checksum": "B368461FB684F3901D76CD2C0554589CEF01FD9F990A29FF7F0700A93A13FB4A",
+      "algorithm": "sha256"
+    },
+    {
       "id": "registries/github_content/github.com/aquaproj/aqua-registry/v4.368.0/registry.yaml",
       "checksum": "2734E65A5B18CF175970AE4873E920CFEE55EBBAD20C387AB20C20A42D8B4DDD0A576FC04F2FFF4F8DDB14B2F57EBF44618A8258ED45ACE104BA0F099341D04C",
       "algorithm": "sha512"

@@ -11,6 +11,10 @@ from pathlib import Path
 from typing import List, Optional, Callable, Tuple, Dict, Any
 from ulid import ULID
 
+import os
+# Force sync API to avoid asyncio conflicts
+os.environ["PLAYWRIGHT_BROWSERS_PATH"] = "0"
+
 from playwright.sync_api import Page, sync_playwright, Error as PlaywrightError
 
 from notebooklm_automator.links import add_link_sources, generate_audio_overview
@@ -197,14 +201,37 @@ class NotebookLMAutomator:
             
             file_path = output_dir / filename
             
-            # Download the file using the browser context to maintain cookies/session
-            with self.page.expect_download() as download_info:
-                download_link.click()
+            # Get the download URL and use requests to download manually
+            print("Starting audio download...")
             
-            download = download_info.value
+            # Get cookies from the browser context
+            context = self.page.context
+            cookies = context.cookies()
             
-            # Wait for the download to complete and save the file
-            download.save_as(file_path)
+            # Convert cookies to requests format
+            import requests
+            session = requests.Session()
+            for cookie in cookies:
+                session.cookies.set(cookie['name'], cookie['value'], domain=cookie['domain'])
+            
+            # Set headers to mimic browser
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                'Accept': 'audio/mpeg,audio/*,*/*',
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Referer': self.page.url
+            }
+            
+            # Download the file using requests
+            response = session.get(download_url, headers=headers, stream=True)
+            response.raise_for_status()
+            
+            with open(file_path, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+            
+            print(f"Audio downloaded successfully to: {file_path}")
                 
             return True, str(file_path), title, description
             
