@@ -22,43 +22,42 @@ from notebooklm_automator.spotify import SpotifyAutomator
 
 class NotebookLMAutomator:
     """
-    Core class for automating NotebookLM operations.
+    Automate NotebookLM operations using Playwright.
 
-    This class handles the common functionality for both CLI and Streamlit versions:
-    1. Connecting to Chrome via CDP
-    2. Navigating to NotebookLM
-    3. Adding URLs as sources
-    4. Generating audio overview
+    This class connects to Chrome via Chrome DevTools Protocol (CDP) and automates
+    the process of adding sources to NotebookLM and generating audio overviews.
+
+    Example:
+        with NotebookLMAutomator() as automator:
+            automator.connect().process_urls(urls).generate_audio()
     """
 
-    def __init__(self, port=9222):
+    def __init__(self, port=9222, use_playwright_chromium=False):
         """
-        Initialize the automator with the specified CDP port.
+        Initialize the NotebookLM automator.
 
         Args:
-            port: Port for Chrome DevTools Protocol (CDP) connection (default: 9222).
+            port: CDP port for Chrome connection (default: 9222).
+            use_playwright_chromium: If True, uses Playwright's Chromium instead of connecting to external Chrome.
         """
         self.port = port
+        self.use_playwright_chromium = use_playwright_chromium
         self.playwright = None
         self.browser = None
+        self.context = None
         self.page = None
 
     def __enter__(self):
-        """
-        Context manager entry point.
-        """
-        self.connect()
+        """Context manager entry."""
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        """
-        Context manager exit point.
-        """
+        """Context manager exit with cleanup."""
         self.close()
 
     def connect(self):
         """
-        Connect to Chrome via CDP and navigate to NotebookLM.
+        Connect to Chrome via CDP or launch Playwright Chromium and navigate to NotebookLM.
 
         Returns:
             self: For method chaining.
@@ -70,22 +69,41 @@ class NotebookLMAutomator:
         self.playwright = sync_playwright().start()
 
         try:
-            # Connect to Chrome via CDP
-            self.browser = self.playwright.chromium.connect_over_cdp(f"http://localhost:{self.port}")
+            if self.use_playwright_chromium:
+                # Use Playwright's Chromium directly
+                print(f"🚀 Iniciando Chromium do Playwright...")
+                self.browser = self.playwright.chromium.launch(
+                    headless=False,
+                    args=[
+                        "--window-size=1280,800",
+                        "--no-first-run",
+                        "--no-default-browser-check"
+                    ]
+                )
+                self.context = self.browser.new_context(
+                    viewport={"width": 1280, "height": 800}
+                )
+                self.page = self.context.new_page()
+            else:
+                # Connect to Chrome via CDP (original method)
+                print(f"🔗 Tentando conectar ao Chrome via CDP na porta {self.port}...")
+                self.browser = self.playwright.chromium.connect_over_cdp(f"http://localhost:{self.port}")
 
-            # Check if there are any browser contexts
-            if not self.browser.contexts:
-                raise PlaywrightError("No browser contexts found. Make sure Chrome is running with an open window.")
+                # Check if there are any browser contexts
+                if not self.browser.contexts:
+                    raise PlaywrightError("No browser contexts found. Make sure Chrome is running with an open window.")
 
-            # Use the first available context
-            context = self.browser.contexts[0]
-            self.page = context.new_page()
+                # Use the first available context
+                self.context = self.browser.contexts[0]
+                self.page = self.context.new_page()
 
-            # Set viewport size to ensure proper layout (minimum width 1261px for 3-column layout)
-            self.page.set_viewport_size({"width": 1280, "height": 800})
+                # Set viewport size to ensure proper layout (minimum width 1261px for 3-column layout)
+                self.page.set_viewport_size({"width": 1280, "height": 800})
 
+            print("🌐 Navegando para NotebookLM...")
             # Navigate to NotebookLM
             self.page.goto("https://notebooklm.google.com/", timeout=60000)
+            print("✅ Conectado ao NotebookLM com sucesso!")
 
             return self
 
@@ -134,12 +152,17 @@ class NotebookLMAutomator:
         try:
             if self.page and not self.page.is_closed():
                 self.page = None
+            if self.context:
+                self.context.close()
+                self.context = None
+            if self.browser:
+                self.browser.close()
+                self.browser = None
         finally:
             if self.playwright:
                 self.playwright.stop()
                 self.playwright = None
-                self.browser = None
-                
+
     def download_audio(self, project_url: str, output_dir: Optional[str] = None) -> Tuple[bool, str, str, str]:
         """
         Download the audio file from a NotebookLM project.

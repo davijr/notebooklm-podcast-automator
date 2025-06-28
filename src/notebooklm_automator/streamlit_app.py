@@ -47,7 +47,8 @@ def main():
         if st.button("Run Automation", type="primary", key="run_automation"):
             port = st.session_state.get('port', 9222)
             use_jina_reader = st.session_state.get('use_jina_reader', False)
-            process_notebooklm_urls(urls_text, port, use_jina_reader)
+            use_playwright_chromium = st.session_state.get('use_playwright_chromium', False)
+            process_notebooklm_urls(urls_text, port, use_jina_reader, use_playwright_chromium)
 
     with tab2:
         st.title("Spotify for Podcasters アップロード")
@@ -129,6 +130,14 @@ def main():
             key="use_jina_reader"
         )
 
+        # Playwright Chromium option
+        use_playwright_chromium = st.checkbox(
+            "Use Playwright Chromium",
+            value=False,
+            help="If checked, uses Playwright's built-in Chromium instead of connecting to external Chrome. Useful if you have trouble launching Chrome with debugging.",
+            key="use_playwright_chromium"
+        )
+
         # Chrome launch instructions
         st.markdown("### How to Launch Chrome with Remote Debugging")
         st.code(f"/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port={port} --user-data-dir=./chrome-user-data --window-size=1280,800", language="bash")
@@ -145,7 +154,7 @@ def main():
         For more information, visit the [GitHub repository](https://github.com/upamune/notebooklm-podcast-automator).
         """)
 
-def process_notebooklm_urls(urls_text: str, port: int, use_jina_reader: bool) -> None:
+def process_notebooklm_urls(urls_text: str, port: int, use_jina_reader: bool, use_playwright_chromium: bool = False) -> None:
     """Process URLs with NotebookLM and generate audio."""
     # Process URLs from text area
     raw_urls = [url.strip() for url in urls_text.split('\n') if url.strip()]
@@ -197,7 +206,7 @@ def process_notebooklm_urls(urls_text: str, port: int, use_jina_reader: bool) ->
         log_output.text(log_capture.getvalue())
 
         # Use the core automator class
-        with NotebookLMAutomator(port) as automator:
+        with NotebookLMAutomator(port, use_playwright_chromium) as automator:
             try:
                 # Connect to Chrome and navigate to NotebookLM
                 print("Successfully connected to Chrome and navigated to NotebookLM.")

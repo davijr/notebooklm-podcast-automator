@@ -15,4 +15,9 @@ dependencies = [
 run-automator = "notebooklm_automator.main:run_automation"
 
 [tool.uv.sources]
-notebooklm_automator = { path = "src" }
+notebooklm-automator = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "notebooklm-automator",
+]
