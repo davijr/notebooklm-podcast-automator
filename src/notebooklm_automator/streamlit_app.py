@@ -141,7 +141,7 @@ def main():
 
         # Chrome launch instructions
         st.markdown("### How to Launch Chrome with Remote Debugging")
-        st.code(f"/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port={port} --user-data-dir=./chrome-user-data --window-size=1280,800", language="bash")
+        st.code(f"/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port={port} --user-data-dir=C:\\dev\\workspace_mygithub\\notebooklm-podcast-automator\\chrome-user-data --window-size=1280,800", language="bash")
         st.markdown("**Note:** Adjust the path for your operating system. The `--user-data-dir` parameter creates a separate Chrome profile for this automation. The `--window-size` parameter ensures proper display of NotebookLM's 3-column layout.")
 
         # Add a separator
@@ -243,7 +243,7 @@ def process_notebooklm_urls(urls_text: str, port: int, use_jina_reader: bool, us
                 error_msg = f"A Playwright error occurred: {e}"
                 print(error_msg)
                 print("Please ensure Google Chrome is running with remote debugging enabled on the specified port.")
-                print(f"Example command to launch Chrome: /Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port={port} --user-data-dir=./chrome-user-data --window-size=1280,800")
+                print(f"Example command to launch Chrome: /Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port={port} --user-data-dir=C:\\dev\\workspace_mygithub\\notebooklm-podcast-automator\\chrome-user-data --window-size=1280,800")
                 log_output.text(log_capture.getvalue())
                 status_text.write(f"❌ {error_msg}")
             except Exception as e:

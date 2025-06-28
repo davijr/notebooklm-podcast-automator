@@ -72,7 +72,7 @@ To use the Spotify Uploader, you'll need a Spotify for Podcasters account and th
 
 **macOS**:
 ```bash
-/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir=./chrome-user-data --window-size=1280,800
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data --window-size=1280,800
 ```
 
 **Windows**:

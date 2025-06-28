@@ -38,7 +38,7 @@ function Start-ChromeWithDebug {
     Write-Host "🚀 Iniciando Chrome com debugging..." -ForegroundColor Green
     $chromeArgs = @(
         "--remote-debugging-port=9222",
-        "--user-data-dir=./chrome-user-data",
+        "--user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data",
         "--window-size=1280,800",
         "--no-first-run",
         "--no-default-browser-check"
@@ -68,12 +68,12 @@ function Start-ChromeWithDebug {
         
         Write-Host "⚠️  Chrome iniciado, mas debugging pode não estar ativo" -ForegroundColor Yellow
         Write-Host "   Se tiver problemas, tente executar manualmente:" -ForegroundColor White
-        Write-Host "   `"$chromePath`" --remote-debugging-port=9222 --user-data-dir=./chrome-user-data" -ForegroundColor Gray
+        Write-Host "   `"$chromePath`" --remote-debugging-port=9222 --user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data" -ForegroundColor Gray
         
     } catch {
         Write-Host "❌ Erro ao iniciar Chrome: $($_.Exception.Message)" -ForegroundColor Red
         Write-Host "   Tente executar manualmente:" -ForegroundColor White
-        Write-Host "   `"$chromePath`" --remote-debugging-port=9222 --user-data-dir=./chrome-user-data" -ForegroundColor Gray
+        Write-Host "   `"$chromePath`" --remote-debugging-port=9222 --user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data" -ForegroundColor Gray
     }
 }
 

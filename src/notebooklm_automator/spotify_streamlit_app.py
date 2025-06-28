@@ -89,7 +89,7 @@ def main():
 
         # Chrome launch instructions
         st.markdown("### How to Launch Chrome with Remote Debugging")
-        st.code(f"/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port={port} --user-data-dir=./chrome-user-data --window-size=1280,800", language="bash")
+        st.code(f"/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port={port} --user-data-dir=C:\\dev\\workspace_mygithub\\notebooklm-podcast-automator\\chrome-user-data --window-size=1280,800", language="bash")
         st.markdown("**Note:** Adjust the path for your operating system. The `--user-data-dir` parameter creates a separate Chrome profile for this automation. The `--window-size` parameter ensures proper display of NotebookLM's 3-column layout.")
 
         # Add a separator

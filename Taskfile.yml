@@ -18,17 +18,17 @@ tasks:
 
   chrome:
     desc: Launch Chrome with remote debugging enabled
-    cmd: /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir=./chrome-user-data --window-size=1280,800
+    cmd: /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data --window-size=1280,800
     platforms: [darwin]
 
   chrome:windows:
     desc: Launch Chrome with remote debugging enabled (Windows)
-    cmd: '"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=./chrome-user-data --window-size=1280,800'
+    cmd: '"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data --window-size=1280,800'
     platforms: [windows]
 
   chrome:linux:
     desc: Launch Chrome with remote debugging enabled (Linux)
-    cmd: google-chrome --remote-debugging-port=9222 --user-data-dir=./chrome-user-data --window-size=1280,800
+    cmd: google-chrome --remote-debugging-port=9222 --user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data --window-size=1280,800
     platforms: [linux]
 
   app:
@@ -50,4 +50,41 @@ tasks:
     desc: Run CLI version with URLs from file or stdin
     deps: [setup]
     cmd: "{{.VENV_PATH}}/bin/run-automator {{.CLI_ARGS}}"
+
+  install:
+    desc: Install dependencies using uv
+    cmds:
+      - uv sync
+
+  update:
+    desc: Update dependencies to latest versions
+    cmds:
+      - uv sync --upgrade
+
+  run:
+    desc: Run the automation script
+    cmds:
+      - uv run python -m notebooklm_automator.main
+
+  run-macos:
+    desc: Launch Chrome with remote debugging on macOS and run the automation
+    cmd: /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --remote-debugging-port=9222 --user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data --window-size=1280,800
+
+  run-windows:
+    desc: Launch Chrome with remote debugging on Windows
+    cmd: '"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data --window-size=1280,800'
+
+  run-linux:
+    desc: Launch Chrome with remote debugging on Linux
+    cmd: google-chrome --remote-debugging-port=9222 --user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data --window-size=1280,800
+
+  streamlit:
+    desc: Launch Streamlit interface
+    cmds:
+      - uv run streamlit run src/notebooklm_automator/streamlit_app.py
+
+  test:
+    desc: Run pytest tests
+    cmds:
+      - uv run pytest
 

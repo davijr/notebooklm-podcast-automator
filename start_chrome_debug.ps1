@@ -24,10 +24,10 @@ if (-not (Test-Path "./chrome-user-data")) {
 Write-Host "Iniciando Chrome..." -ForegroundColor Cyan
 
 # Comando para iniciar Chrome
-$chromeCommand = "`"$chromePath`" --remote-debugging-port=9222 --user-data-dir=./chrome-user-data --window-size=1280,800"
+$chromeCommand = "`"$chromePath`" --remote-debugging-port=9222 --user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data --window-size=1280,800"
 
 # Executar usando cmd para garantir compatibilidade
-cmd /c "start `"Chrome Debug`" `"$chromePath`" --remote-debugging-port=9222 --user-data-dir=./chrome-user-data --window-size=1280,800"
+cmd /c "start `"Chrome Debug`" `"$chromePath`" --remote-debugging-port=9222 --user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data --window-size=1280,800"
 
 # Aguardar e verificar
 Write-Host "Aguardando Chrome inicializar..." -ForegroundColor Yellow

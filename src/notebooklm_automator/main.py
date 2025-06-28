@@ -91,7 +91,7 @@ def run_automation():
     except PlaywrightError as e:
         print(f"A Playwright error occurred: {e}")
         print("Please ensure Google Chrome is running with remote debugging enabled on the specified port.")
-        print(f"Example command to launch Chrome: /Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port={args.port} --user-data-dir=./chrome-user-data --window-size=1280,800")
+        print(f"Example command to launch Chrome: /Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --remote-debugging-port={args.port} --user-data-dir=C:\\dev\\workspace_mygithub\\notebooklm-podcast-automator\\chrome-user-data --window-size=1280,800")
         sys.exit(1)
     except Exception as e:
         print(f"An unexpected error occurred: {e}")

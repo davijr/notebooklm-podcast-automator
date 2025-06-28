@@ -21,7 +21,7 @@ Erro: "Connecting to Chrome on CDP port: 9222..." - Chrome não está rodando co
    ```cmd
    cd /d "C:\dev\workspace_mygithub\notebooklm-podcast-automator"
    
-   "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=./chrome-user-data --window-size=1280,800
+   "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data --window-size=1280,800
    ```
 
 4. **Verifique se funcionou:**
@@ -42,7 +42,7 @@ Get-Process chrome -ErrorAction SilentlyContinue | Stop-Process -Force
 Start-Sleep -Seconds 3
 
 # 3. Inicie Chrome com debugging
-cmd /c 'start "Chrome Debug" "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=./chrome-user-data --window-size=1280,800'
+cmd /c 'start "Chrome Debug" "C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data --window-size=1280,800'
 
 # 4. Aguarde 5 segundos
 Start-Sleep -Seconds 5
@@ -56,7 +56,7 @@ netstat -an | findstr 9222
 Se a porta 9222 não funcionar, tente outras portas:
 
 ```cmd
-"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9223 --user-data-dir=./chrome-user-data --window-size=1280,800
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9223 --user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data --window-size=1280,800
 ```
 
 E no Streamlit, configure a porta 9223 na interface.
@@ -107,7 +107,7 @@ Se nada funcionar, use este comando direto no CMD como Admin:
 ```cmd
 taskkill /im chrome.exe /f
 timeout 3
-"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=./chrome-user-data --window-size=1280,800
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data --window-size=1280,800
 ```
 
 Isso força o fechamento e reabertura do Chrome com debugging. 

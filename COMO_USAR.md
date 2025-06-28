@@ -45,7 +45,7 @@ A **nova opção** mais fácil e confiável:
 Se preferir usar o Chrome instalado no sistema:
 
 ```powershell
-"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=./chrome-user-data --window-size=1280,800
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir=C:\dev\workspace_mygithub\notebooklm-podcast-automator\chrome-user-data --window-size=1280,800
 ```
 
 ## 🌐 Interfaces Disponíveis
