@@ -74,6 +74,7 @@ def main():
                 st.error("Please enter at least one valid NotebookLM project URL.")
             else:
                 port = st.session_state.get('port', 9222)
+                use_playwright_chromium = st.session_state.get('use_playwright_chromium', False)
                 results = []
                 
                 # Create columns for progress display
@@ -91,7 +92,7 @@ def main():
                     progress_bar.progress(progress)
                     status_text.text(f"Processing {i}/{len(urls)}: {url[:50]}...")
                     
-                    success, message = upload_to_spotify(url, port, show_status=False)
+                    success, message = upload_to_spotify(url, port, use_playwright_chromium, show_status=False)
                     results.append((url, success, message))
                     
                     # Update status
@@ -208,7 +209,7 @@ def process_notebooklm_urls(urls_text: str, port: int, use_jina_reader: bool, us
         # Use the core automator class
         with NotebookLMAutomator(port, use_playwright_chromium) as automator:
             try:
-                # Connect to Chrome and navigate to NotebookLM
+                # Connection happens automatically in __enter__
                 print("Successfully connected to Chrome and navigated to NotebookLM.")
                 status_text.write("Successfully connected to NotebookLM...")
                 log_output.text(log_capture.getvalue())
@@ -298,7 +299,7 @@ def run_in_thread(func, *args, **kwargs):
     
     return q.get()
 
-def upload_to_spotify(notebook_url: str, port: int, show_status: bool = True) -> tuple[bool, str]:
+def upload_to_spotify(notebook_url: str, port: int, use_playwright_chromium: bool = False, show_status: bool = True) -> tuple[bool, str]:
     """
     Upload audio from a single NotebookLM project to Spotify for Podcasters.
     
@@ -321,7 +322,7 @@ def upload_to_spotify(notebook_url: str, port: int, show_status: bool = True) ->
         log("Connecting to Chrome...")
         
         # NotebookLMからのオーディオダウンロードを実行
-        success, result = run_in_thread(_download_audio, notebook_url, port, log)
+        success, result = run_in_thread(_download_audio, notebook_url, port, use_playwright_chromium, log)
         if not success:
             return False, result
         
@@ -331,7 +332,7 @@ def upload_to_spotify(notebook_url: str, port: int, show_status: bool = True) ->
         
         # Spotifyへのアップロードを実行
         log("Uploading to Spotify for Podcasters...")
-        success, result = run_in_thread(_upload_to_spotify, port, file_path, title, description)
+        success, result = run_in_thread(_upload_to_spotify, port, use_playwright_chromium, file_path, title, description)
         
         if not success:
             return False, f"Failed to upload to Spotify: {result}"
@@ -352,10 +353,10 @@ def upload_to_spotify(notebook_url: str, port: int, show_status: bool = True) ->
         log(error_msg)
         return False, error_msg
 
-def _download_audio(notebook_url: str, port: int, log) -> tuple[bool, tuple]:
+def _download_audio(notebook_url: str, port: int, use_playwright_chromium: bool, log) -> tuple[bool, tuple]:
     """Download audio from NotebookLM (runs in a separate thread)."""
     try:
-        with NotebookLMAutomator(port) as automator:
+        with NotebookLMAutomator(port, use_playwright_chromium) as automator:
             log("Downloading audio from NotebookLM...")
             success, file_path, title, description = automator.download_audio(notebook_url)
             if success:
@@ -364,10 +365,10 @@ def _download_audio(notebook_url: str, port: int, log) -> tuple[bool, tuple]:
     except Exception as e:
         return False, (str(e), "", "")
 
-def _upload_to_spotify(port: int, file_path: str, title: str, description: str) -> tuple[bool, str]:
+def _upload_to_spotify(port: int, use_playwright_chromium: bool, file_path: str, title: str, description: str) -> tuple[bool, str]:
     """Upload episode to Spotify (runs in a separate thread)."""
     try:
-        with NotebookLMAutomator(port) as automator:
+        with NotebookLMAutomator(port, use_playwright_chromium) as automator:
             spotify = SpotifyAutomator(automator.page)
             return spotify.upload_episode(file_path, title, description)
     except Exception as e:

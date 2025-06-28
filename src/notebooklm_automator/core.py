@@ -29,7 +29,8 @@ class NotebookLMAutomator:
 
     Example:
         with NotebookLMAutomator() as automator:
-            automator.connect().process_urls(urls).generate_audio()
+            # connect() is called automatically
+            automator.process_urls(urls).generate_audio()
     """
 
     def __init__(self, port=9222, use_playwright_chromium=False):
@@ -49,6 +50,7 @@ class NotebookLMAutomator:
 
     def __enter__(self):
         """Context manager entry."""
+        self.connect()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
