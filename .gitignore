@@ -211,3 +211,6 @@ pyrightconfig.json
 z/
 
 chrome-user-data/
+
+# VSCode history extension
+.history/
